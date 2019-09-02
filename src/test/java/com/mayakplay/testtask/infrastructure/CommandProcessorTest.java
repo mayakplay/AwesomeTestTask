@@ -4,7 +4,6 @@ import com.mayakplay.testtask.controller.TestController;
 import com.mayakplay.testtask.controller.TestControllerUppercase;
 import com.mayakplay.testtask.exception.CommandAlreadyExistsException;
 import org.junit.Assert;
-import org.junit.Rule;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

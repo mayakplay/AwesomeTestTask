@@ -1,7 +1,6 @@
 package com.mayakplay.testtask.service.impl;
 
 import com.mayakplay.testtask.exception.ProductDoesNotExistsException;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.time.LocalDate;
