@@ -9,10 +9,7 @@ import com.mayakplay.testtask.model.Sale;
 import com.mayakplay.testtask.service.ProductService;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public final class ProductServiceImpl implements ProductService {
