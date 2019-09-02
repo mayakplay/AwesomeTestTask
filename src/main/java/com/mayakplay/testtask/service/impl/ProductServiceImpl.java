@@ -3,6 +3,7 @@ package com.mayakplay.testtask.service.impl;
 import com.mayakplay.testtask.exception.NotEnoughProductionException;
 import com.mayakplay.testtask.exception.ProductAlreadyExistsException;
 import com.mayakplay.testtask.exception.ProductDoesNotExistsException;
+import com.mayakplay.testtask.exception.SalesDoesNotFoundException;
 import com.mayakplay.testtask.model.Batch;
 import com.mayakplay.testtask.model.Sale;
 import com.mayakplay.testtask.service.ProductService;
@@ -75,7 +76,7 @@ public final class ProductServiceImpl implements ProductService {
     public int getProfitFor(String productName, LocalDate date) throws ProductDoesNotExistsException {
         final List<Sale> sales = salesMap.get(productName);
         if (sales == null)
-            throw new ProductDoesNotExistsException();
+            throw new SalesDoesNotFoundException();
 
         return sales.stream()
                 .filter(sale -> sale.getDate().compareTo(date) < 1)

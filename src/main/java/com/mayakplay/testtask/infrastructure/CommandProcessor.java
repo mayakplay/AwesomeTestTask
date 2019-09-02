@@ -51,8 +51,10 @@ public final class CommandProcessor {
     /**
      * Метод ищет методы, над которыми стоит {@link CommandMethod},
      * в классе объекта контроллера и создает из них {@link CommandDefinition}
+     *
+     * @throws CommandAlreadyExistsException если команда с таким именем уже существует
      */
-    public void registerProcessedController(Object controller) {
+    public void registerProcessedController(Object controller) throws CommandAlreadyExistsException {
         for (Method method : controller.getClass().getDeclaredMethods()) {
             final CommandMethod annotation = method.getAnnotation(CommandMethod.class);
 
@@ -77,8 +79,7 @@ public final class CommandProcessor {
     }
     //endregion
 
-    //region PROCESSING
-
+    //region API
     /**
      * Метод обрабатывает строку, как команду
      *
@@ -115,9 +116,19 @@ public final class CommandProcessor {
                 .filter(processingDescription -> !processingDescription.getMistakeType().equals(ArgumentMistakeType.OK))
                 .map(ArgumentProcessingDescription::getErrorDescription)
                 .forEach(System.out::println);
+
         return "ERROR";
     }
 
+    /**
+     * @return количество зарегистрированных команд
+     */
+    public int getCommandsCount() {
+        return classDefinitionsMap.size();
+    }
+    //endregion
+
+    //region PROCESSING
     /**
      * Метод преобразует массив строк аргументов в лист {@link ArgumentProcessingDescription},
      * содержащий информацию об обработке аргументов.
@@ -237,7 +248,6 @@ public final class CommandProcessor {
     //endregion
 
     //region DEFAULT COMMANDS
-
     /**
      * Метод стандартной команды выхода из программы
      */
